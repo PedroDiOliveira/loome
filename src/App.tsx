@@ -6,7 +6,6 @@ import { Problem } from "@/components/sections/Problem"
 import { Included } from "@/components/sections/Included"
 import { Cases } from "@/components/sections/Cases"
 import { Process } from "@/components/sections/Process"
-import { Pricing } from "@/components/sections/Pricing"
 import { FAQ } from "@/components/sections/FAQ"
 import { FinalCTA } from "@/components/sections/FinalCTA"
 
@@ -20,7 +19,6 @@ function App() {
         <Included />
         <Cases />
         <Process />
-        <Pricing />
         <FAQ />
         <FinalCTA />
       </main>

@@ -98,6 +98,9 @@ export function FinalCTA() {
           >
             {submitting ? "Enviando..." : "Quero uma proposta"}
           </Button>
+          <p className="text-center text-sm text-gray-500 mt-3">
+            Projetos a partir de R$ 1.099,90. Resposta em até 4 horas.
+          </p>
         </form>
       </div>
     </SectionWrapper>
