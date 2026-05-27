@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://loome.com.br/sitemap.xml

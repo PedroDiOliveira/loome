@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat /tmp/loome-dev.log)",
+      "Read(//tmp/**)",
+      "Bash(pkill -f \"vite --port 5173\")"
+    ]
+  }
+}
