@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import { Logo } from "@/components/shared/Logo"
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -20,8 +21,9 @@ export function Header() {
       )}
     >
       <div className="max-w-6xl mx-auto px-5 md:px-8 flex items-center justify-between h-16">
-        <a href="#" className="text-xl font-bold text-gray-950 tracking-tight">
-          Loome
+        <a href="#" className="flex items-center gap-2.5">
+          <Logo size={28} />
+          <span className="text-xl font-bold text-gray-950 tracking-tight">Loome</span>
         </a>
         <nav className="flex items-center gap-6">
           <a
