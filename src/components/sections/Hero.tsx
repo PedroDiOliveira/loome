@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
 
+const WHATSAPP_URL = `https://wa.me/5561999999999?text=${encodeURIComponent("Olá! Vi o site da Loome e tenho interesse em um site para minha clínica.")}`
+
 export function Hero() {
   return (
     <section className="min-h-[90vh] flex items-center bg-gray-50 pt-16 relative overflow-hidden">
@@ -21,11 +23,17 @@ export function Hero() {
             <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-lg mx-auto lg:mx-0">
               Sites rápidos e otimizados para clínicas odontológicas de Brasília. Entrega em 7 a 14 dias.
             </p>
-            <div className="mt-8">
-              <a href="#contato">
+            <div className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-3">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="text-base px-8 py-4 h-auto">
                   Quero uma proposta
                 </Button>
+              </a>
+              <a
+                href="#contato"
+                className="text-sm text-gray-500 hover:text-gray-700 transition-colors underline underline-offset-4 self-center"
+              >
+                ou deixe seus dados
               </a>
             </div>
           </div>
