@@ -25,7 +25,7 @@ export const cases: CaseStudy[] = [
     location: "Brasília-DF",
     tagline: "Do Instagram para o site próprio — em 10 dias.",
     description:
-      "A Aliá precisava de presença online profissional para converter os seguidores do Instagram em pacientes agendados. Entregamos um site mobile-first com integração direta ao WhatsApp e posicionamento local no Google.",
+      "Site desenvolvido para uma clínica de ortodontia em Brasília, com foco em captação de pacientes via mobile. O projeto contempla integração direta com WhatsApp, SEO local e uma estrutura pensada para converter visitas em agendamentos.",
     desktopImg: aliaDesktop,
     mobileImg: aliaMobile,
     desktopUrl: "aliaortodontia.com.br",
