@@ -1,5 +1,6 @@
 import aliaDesktop from "@/assets/case-alia-ortodontia-desktop.webp"
 import aliaMobile from "@/assets/case-alia-ortodontia-mobile.webp"
+import aliaVideo from "@/assets/case-alia-ortodontia-video.mp4"
 
 export interface CaseStudy {
   id: string
@@ -28,6 +29,7 @@ export const cases: CaseStudy[] = [
     desktopImg: aliaDesktop,
     mobileImg: aliaMobile,
     desktopUrl: "aliaortodontia.com.br",
+    videoUrl: aliaVideo,
     tags: ["WhatsApp direto", "SEO local", "Mobile first", "Entrega em 10 dias"],
   },
 ]
