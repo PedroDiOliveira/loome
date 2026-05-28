@@ -123,10 +123,10 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
           >
             <button
               onClick={() => setVideoOpen(false)}
-              className="absolute -top-10 right-0 text-white/70 hover:text-white text-sm font-medium transition-colors flex items-center gap-1.5"
+              aria-label="Fechar vídeo"
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
             >
-              Fechar
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M1 1l12 12M13 1L1 13" />
               </svg>
             </button>
