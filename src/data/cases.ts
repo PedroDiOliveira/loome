@@ -1,6 +1,9 @@
 import aliaDesktop from "@/assets/case-alia-ortodontia-desktop.webp"
 import aliaMobile from "@/assets/case-alia-ortodontia-mobile.webp"
 import aliaVideo from "@/assets/case-alia-ortodontia-video.mp4"
+import raizDesktop from "@/assets/case-raiz-implantes-desktop.webp"
+import raizMobile from "@/assets/case-raiz-implantes-mobile.webp"
+import raizVideo from "@/assets/case-raiz-implantes-video.mp4"
 
 export interface CaseStudy {
   id: string
@@ -31,5 +34,19 @@ export const cases: CaseStudy[] = [
     desktopUrl: "aliaortodontia.com.br",
     videoUrl: aliaVideo,
     tags: ["WhatsApp direto", "SEO local", "Mobile first", "Entrega em 10 dias"],
+  },
+  {
+    id: "raiz-implantes",
+    clinicName: "Raiz Implantes",
+    segment: "Implantodontia",
+    location: "São Paulo-SP",
+    tagline: "Presença digital à altura de uma clínica especializada.",
+    description:
+      "Site desenvolvido para uma clínica de implantodontia em São Paulo, com foco em transmitir autoridade e facilitar o primeiro contato do paciente. O projeto contempla estrutura mobile-first, integração com WhatsApp e posicionamento local no Google.",
+    desktopImg: raizDesktop,
+    mobileImg: raizMobile,
+    desktopUrl: "raizimplantes.com.br",
+    videoUrl: raizVideo,
+    tags: ["WhatsApp direto", "SEO local", "Mobile first", "Implantodontia"],
   },
 ]
