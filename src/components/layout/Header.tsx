@@ -27,13 +27,13 @@ export function Header() {
         </a>
         <nav className="flex items-center gap-6">
           <a
-            href="#investimento"
+            href="#cases"
             className={cn(
               "text-sm font-medium transition-colors",
               scrolled ? "text-gray-600 hover:text-gray-900" : "text-gray-700 hover:text-gray-900"
             )}
           >
-            Planos
+            Cases
           </a>
           <a
             href="#contato"
