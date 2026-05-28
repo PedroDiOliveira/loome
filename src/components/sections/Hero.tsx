@@ -31,7 +31,7 @@ export function Hero() {
               className="text-lg md:text-xl text-gray-600 mt-6 max-w-lg mx-auto lg:mx-0"
               style={{ animation: "hero-fade-up 0.6s ease-out 0.15s both" }}
             >
-              Sites rápidos e otimizados para clínicas odontológicas de Brasília. Entrega em 7 a 14 dias.
+              Sites rápidos e otimizados para clínicas odontológicas de Brasília. Entrega em 5 a 10 dias.
             </p>
             <div
               className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-3"
