@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import desktopImg from "@/assets/case-alia-ortodontia-desktop.webp"
 import mobileImg from "@/assets/case-alia-ortodontia-mobile.webp"
 
-const WHATSAPP_URL = `https://wa.me/5561999999999?text=${encodeURIComponent("Olá! Vi o site da Loome e tenho interesse em um site para minha clínica.")}`
+const WHATSAPP_URL = `https://wa.me/5561999023060?text=${encodeURIComponent("Olá! Vi o site da Loome e tenho interesse em um site para minha clínica.")}`
 
 export function Hero() {
   return (

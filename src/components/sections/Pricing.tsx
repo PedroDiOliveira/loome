@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading"
 import { PricingCard } from "@/components/shared/PricingCard"
 import { plans } from "@/data/pricing"
 
-const WHATSAPP_NUMBER = "5561999999999"
+const WHATSAPP_NUMBER = "5561999023060"
 
 export function Pricing() {
   return (

@@ -10,13 +10,11 @@ export function Footer() {
               <Logo size={28} />
               <span className="text-xl font-bold text-gray-900 tracking-tight">Loome</span>
             </div>
-            <p className="text-sm text-gray-500 mt-1">Pedro Oliveira</p>
-            <p className="text-xs text-gray-400 mt-1">CNPJ: 00.000.000/0001-00</p>
           </div>
 
           <div className="flex gap-6">
             <a
-              href="https://linkedin.com/in/"
+              href="https://www.linkedin.com/in/pedrodioliveira/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -24,7 +22,7 @@ export function Footer() {
               LinkedIn
             </a>
             <a
-              href="https://github.com/"
+              href="https://github.com/PedroDiOliveira"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
@@ -32,10 +30,10 @@ export function Footer() {
               GitHub
             </a>
             <a
-              href="mailto:contato@loome.com.br"
+              href="mailto:santanadioliveira@gmail.com"
               className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
             >
-              contato@loome.com.br
+              santanadioliveira@gmail.com
             </a>
           </div>
         </div>
