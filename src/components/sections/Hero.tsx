@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button"
+import desktopImg from "@/assets/screenshot-desktop.webp"
+import mobileImg from "@/assets/screenshot-mobile.webp"
 
 const WHATSAPP_URL = `https://wa.me/5561999999999?text=${encodeURIComponent("Olá! Vi o site da Loome e tenho interesse em um site para minha clínica.")}`
 
@@ -16,14 +18,25 @@ export function Hero() {
 
       <div className="max-w-6xl mx-auto px-5 md:px-8 w-full relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+          {/* Text content */}
           <div className="flex-1 text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-950 leading-[1.1]">
+            <h1
+              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-950 leading-[1.1]"
+              style={{ animation: "hero-fade-up 0.6s ease-out both" }}
+            >
               Páginas que transformam visitas em pacientes agendados
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mt-6 max-w-lg mx-auto lg:mx-0">
+            <p
+              className="text-lg md:text-xl text-gray-600 mt-6 max-w-lg mx-auto lg:mx-0"
+              style={{ animation: "hero-fade-up 0.6s ease-out 0.15s both" }}
+            >
               Sites rápidos e otimizados para clínicas odontológicas de Brasília. Entrega em 7 a 14 dias.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-3">
+            <div
+              className="mt-8 flex flex-col sm:flex-row items-center lg:items-start gap-3"
+              style={{ animation: "hero-fade-up 0.6s ease-out 0.28s both" }}
+            >
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="text-base px-8 py-4 h-auto">
                   Quero uma proposta
@@ -38,40 +51,46 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Mockup placeholder */}
-          <div className="flex-1 w-full max-w-md lg:max-w-none">
-            <div className="relative">
-              {/* Desktop mockup */}
-              <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-                <div className="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100">
-                  <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
-                  <div className="ml-3 h-5 bg-gray-100 rounded flex-1 max-w-[200px]" />
-                </div>
-                <div className="aspect-[16/10] bg-gradient-to-br from-navy-50 to-gray-50 flex items-center justify-center p-8">
-                  <div className="space-y-3 w-full max-w-[280px]">
-                    <div className="h-4 bg-navy-100 rounded w-3/4" />
-                    <div className="h-3 bg-gray-200 rounded w-full" />
-                    <div className="h-3 bg-gray-200 rounded w-5/6" />
-                    <div className="h-8 bg-navy-200 rounded-lg w-1/2 mt-4" />
+          {/* Device mockups */}
+          <div
+            className="flex-1 w-full max-w-md lg:max-w-none"
+            style={{ animation: "hero-fade-up 0.7s ease-out 0.2s both" }}
+          >
+            <div className="relative pb-16 pr-12">
+
+              {/* Desktop — browser chrome + screenshot real */}
+              <div className="rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
+                {/* Browser chrome */}
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-gray-100 border-b border-gray-200">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                  <div className="ml-2 flex-1 max-w-[220px] bg-white rounded-md px-3 py-1 text-[10px] text-gray-400 border border-gray-200 truncate">
+                    aliaortodontia.com.br
                   </div>
                 </div>
+                {/* Real screenshot */}
+                <img
+                  src={desktopImg}
+                  alt="Exemplo de site para clínica odontológica — desktop"
+                  className="w-full block"
+                  loading="eager"
+                />
               </div>
 
-              {/* Mobile mockup overlapping */}
-              <div className="absolute -bottom-4 -right-4 md:right-8 w-24 md:w-32 bg-white rounded-xl border border-gray-200 shadow-md overflow-hidden">
-                <div className="aspect-[9/16] bg-gradient-to-br from-navy-50 to-gray-50 flex items-center justify-center p-3">
-                  <div className="space-y-2 w-full">
-                    <div className="h-2 bg-navy-100 rounded w-3/4" />
-                    <div className="h-1.5 bg-gray-200 rounded w-full" />
-                    <div className="h-1.5 bg-gray-200 rounded w-5/6" />
-                    <div className="h-4 bg-navy-200 rounded w-1/2 mt-2" />
-                  </div>
-                </div>
+              {/* Mobile — screenshot real com chrome nativo visível */}
+              <div className="absolute bottom-0 right-0 w-[108px] md:w-[128px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <img
+                  src={mobileImg}
+                  alt="Exemplo de site para clínica odontológica — mobile"
+                  className="w-full block"
+                  loading="eager"
+                />
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </section>

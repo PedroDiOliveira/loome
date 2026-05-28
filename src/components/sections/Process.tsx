@@ -2,6 +2,7 @@ import { Fragment } from "react"
 import { SectionWrapper } from "@/components/shared/SectionWrapper"
 import { SectionHeading } from "@/components/shared/SectionHeading"
 import { ProcessStep } from "@/components/shared/ProcessStep"
+import { AnimatedItem } from "@/components/shared/AnimatedItem"
 import { processSteps } from "@/data/process"
 
 export function Process() {
@@ -16,7 +17,9 @@ export function Process() {
       <div className="hidden lg:flex items-start justify-between">
         {processSteps.map((step, i) => (
           <Fragment key={step.id}>
-            <ProcessStep step={step} isLast={i === processSteps.length - 1} />
+            <AnimatedItem delay={i * 100} className="flex-none">
+              <ProcessStep step={step} isLast={i === processSteps.length - 1} />
+            </AnimatedItem>
             {i < processSteps.length - 1 && (
               <div className="h-px bg-gray-300 flex-1 mt-6 mx-2" />
             )}
@@ -27,11 +30,9 @@ export function Process() {
       {/* Mobile: vertical */}
       <div className="lg:hidden relative">
         {processSteps.map((step, i) => (
-          <ProcessStep
-            key={step.id}
-            step={step}
-            isLast={i === processSteps.length - 1}
-          />
+          <AnimatedItem key={step.id} delay={i * 100}>
+            <ProcessStep step={step} isLast={i === processSteps.length - 1} />
+          </AnimatedItem>
         ))}
       </div>
     </SectionWrapper>
