@@ -4,7 +4,9 @@
       "Bash(cat /tmp/loome-dev.log)",
       "Read(//tmp/**)",
       "Bash(pkill -f \"vite --port 5173\")",
-      "Read(//home/pedrodioliveira/Pictures/Screenshots/**)"
+      "Read(//home/pedrodioliveira/Pictures/Screenshots/**)",
+      "Skill(run)",
+      "Skill(run:*)"
     ]
   }
 }

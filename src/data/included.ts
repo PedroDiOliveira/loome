@@ -34,7 +34,7 @@ export const includedItems: IncludedItem[] = [
     id: "seo",
     iconKey: "search",
     title: "SEO local",
-    description: "Otimização para sua clínica aparecer nas buscas de Brasília.",
+    description: "Otimização para sua clínica aparecer nas buscas da sua cidade e região.",
   },
   {
     id: "hosting",

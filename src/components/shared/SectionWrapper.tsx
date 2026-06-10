@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { useFadeIn } from "@/hooks/useFadeIn"
+import { m, viewportOnce } from "@/lib/motion"
 
 interface SectionWrapperProps {
   children: React.ReactNode
@@ -9,25 +9,24 @@ interface SectionWrapperProps {
 }
 
 export function SectionWrapper({ children, className, id, background = "default" }: SectionWrapperProps) {
-  const { ref, isVisible } = useFadeIn()
-
   return (
-    <section
-      ref={ref}
+    <m.section
       id={id}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={viewportOnce}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className={cn(
         "py-20 md:py-28",
         background === "white" && "bg-white",
-        background === "dark" && "bg-navy-950",
+        background === "dark" && "bg-surface-dark",
         background === "default" && "bg-gray-50",
-        "transition-all duration-700 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6",
         className
       )}
     >
       <div className="max-w-6xl mx-auto px-5 md:px-8">
         {children}
       </div>
-    </section>
+    </m.section>
   )
 }

@@ -1,9 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
+@import "@fontsource/instrument-serif";
+@import "@fontsource/instrument-serif/400-italic.css";
 
 @theme {
   --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
 
   --color-navy-50:  oklch(0.97 0.01 245);
   --color-navy-100: oklch(0.93 0.02 245);
@@ -16,6 +19,13 @@
   --color-navy-800: oklch(0.28 0.08 245);
   --color-navy-900: oklch(0.22 0.06 245);
   --color-navy-950: oklch(0.15 0.04 245);
+
+  --color-azure-300: oklch(0.78 0.08 255);
+  --color-azure-400: oklch(0.70 0.10 255);
+  --color-azure-500: oklch(0.62 0.12 255);
+
+  --color-surface-dark: oklch(0.13 0.03 250);
+  --color-surface-dark-raised: oklch(0.17 0.035 250);
 
   --color-background: var(--color-gray-50);
   --color-foreground: var(--color-gray-900);
@@ -41,6 +51,62 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
+
+  --shadow-glow-sm: 0 0 24px 0 oklch(0.62 0.12 255 / 25%);
+  --shadow-glow-md: 0 0 64px -12px oklch(0.62 0.12 255 / 35%);
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 5%), 0 8px 24px -8px oklch(0 0 0 / 8%);
+  --shadow-card-hover: 0 2px 4px oklch(0 0 0 / 6%), 0 16px 40px -12px oklch(0 0 0 / 14%);
+
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-aurora: aurora 16s ease-in-out infinite alternate;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes aurora {
+    from {
+      transform: translate(-6%, -4%) scale(1);
+    }
+    to {
+      transform: translate(6%, 6%) scale(1.15);
+    }
+  }
+}
+
+@utility glass-dark {
+  background-color: oklch(1 0 0 / 5%);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(1 0 0 / 10%);
+}
+
+@utility gradient-border-card {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--color-card), var(--color-card)) padding-box,
+    linear-gradient(135deg, oklch(0.62 0.12 255 / 35%), oklch(0.85 0.02 255 / 12%) 40%, oklch(0.62 0.12 255 / 25%)) border-box;
+}
+
+@utility gradient-border-dark {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--color-surface-dark-raised), var(--color-surface-dark-raised)) padding-box,
+    linear-gradient(135deg, oklch(0.62 0.12 255 / 40%), oklch(1 0 0 / 8%) 40%, oklch(0.62 0.12 255 / 20%)) border-box;
+}
+
+@utility noise {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+  }
 }
 
 @layer base {
@@ -66,17 +132,6 @@
   }
 }
 
-@keyframes hero-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes pulse-slow {
   0%, 100% {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
@@ -88,4 +143,12 @@
 
 .animate-pulse-slow {
   animation: pulse-slow 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-aurora,
+  .animate-pulse-slow {
+    animation: none;
+  }
 }
