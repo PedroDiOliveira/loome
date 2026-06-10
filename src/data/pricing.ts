@@ -32,7 +32,7 @@ export const plans: PricingPlan[] = [
     description: "Tudo do Essencial, mais visibilidade no Google e conteúdo otimizado.",
     features: [
       "Tudo do plano Essencial",
-      "SEO local (Google de Brasília)",
+      "SEO local (Google da sua cidade)",
       "Google Meu Negócio otimizado",
       "2 revisões de conteúdo",
     ],

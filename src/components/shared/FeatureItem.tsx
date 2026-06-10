@@ -1,4 +1,5 @@
 import type { IncludedItem } from "@/data/included"
+import { SpotlightCard } from "@/components/shared/SpotlightCard"
 
 const icons: Record<IncludedItem["iconKey"], React.ReactNode> = {
   mobile: (
@@ -45,20 +46,18 @@ const icons: Record<IncludedItem["iconKey"], React.ReactNode> = {
 
 interface FeatureItemProps {
   item: IncludedItem
-  index: number
 }
 
-export function FeatureItem({ item, index }: FeatureItemProps) {
+export function FeatureItem({ item }: FeatureItemProps) {
   return (
-    <div
-      className="p-6 bg-white rounded-xl border border-gray-200 hover:border-navy-200 transition-colors duration-300"
-      style={{ transitionDelay: `${index * 100}ms` }}
-    >
-      <div className="text-navy-500">
-        {icons[item.iconKey]}
+    <SpotlightCard className="h-full">
+      <div className="p-6">
+        <div className="w-fit text-navy-500 transition-all duration-300 group-hover:text-azure-500 group-hover:scale-110 group-hover:-rotate-3">
+          {icons[item.iconKey]}
+        </div>
+        <h3 className="text-lg font-semibold text-gray-900 mt-4">{item.title}</h3>
+        <p className="text-sm text-gray-600 mt-2">{item.description}</p>
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mt-4">{item.title}</h3>
-      <p className="text-sm text-gray-600 mt-2">{item.description}</p>
-    </div>
+    </SpotlightCard>
   )
 }

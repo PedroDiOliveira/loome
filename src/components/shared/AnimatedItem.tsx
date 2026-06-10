@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { useFadeIn } from "@/hooks/useFadeIn"
+import { m, springSoft, viewportOnce } from "@/lib/motion"
 
 interface AnimatedItemProps {
   children: React.ReactNode
@@ -9,21 +9,15 @@ interface AnimatedItemProps {
 }
 
 export function AnimatedItem({ children, delay = 0, className, direction = "up" }: AnimatedItemProps) {
-  const { ref, isVisible } = useFadeIn({ threshold: 0.1 })
-
   return (
-    <div
-      ref={ref}
-      style={{ transitionDelay: isVisible ? `${delay}ms` : "0ms" }}
-      className={cn(
-        "transition-all duration-500 ease-out",
-        !isVisible && direction === "up" && "opacity-0 translate-y-3",
-        !isVisible && direction === "left" && "opacity-0 -translate-x-3",
-        isVisible && "opacity-100 translate-x-0 translate-y-0",
-        className
-      )}
+    <m.div
+      initial={{ opacity: 0, y: direction === "up" ? 12 : 0, x: direction === "left" ? -12 : 0 }}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      viewport={{ ...viewportOnce, amount: 0.1 }}
+      transition={{ ...springSoft, delay: delay / 1000 }}
+      className={cn(className)}
     >
       {children}
-    </div>
+    </m.div>
   )
 }

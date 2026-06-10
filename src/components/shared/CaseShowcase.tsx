@@ -1,6 +1,17 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import type { CaseStudy } from "@/data/cases"
+import { BrowserFrame } from "@/components/shared/BrowserFrame"
+import {
+  m,
+  AnimatePresence,
+  springSnappy,
+  springSoft,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "@/lib/motion"
 
 interface CaseShowcaseProps {
   caseStudy: CaseStudy
@@ -9,6 +20,28 @@ interface CaseShowcaseProps {
 
 export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) {
   const [videoOpen, setVideoOpen] = useState(false)
+  const mockupRef = useRef<HTMLDivElement>(null)
+  const reduced = useReducedMotion()
+
+  const { scrollYProgress } = useScroll({
+    target: mockupRef,
+    offset: ["start end", "end start"],
+  })
+  const mobileY = useSpring(useTransform(scrollYProgress, [0, 1], [28, -28]), springSoft)
+
+  useEffect(() => {
+    if (!videoOpen) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setVideoOpen(false)
+    }
+    document.addEventListener("keydown", onKey)
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => {
+      document.removeEventListener("keydown", onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [videoOpen])
 
   return (
     <>
@@ -20,17 +53,8 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
       >
         {/* Mockup column */}
         <div className="flex-1 w-full max-w-lg lg:max-w-none">
-          <div className="relative pb-16 pr-12">
-            {/* Desktop mockup */}
-            <div className="rounded-xl overflow-hidden shadow-md border border-gray-200 bg-white">
-              <div className="flex items-center gap-1.5 px-4 py-2.5 bg-gray-100 border-b border-gray-200">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                <div className="ml-2 flex-1 max-w-[220px] bg-white rounded-md px-3 py-1 text-[10px] text-gray-400 border border-gray-200 truncate">
-                  {caseStudy.desktopUrl}
-                </div>
-              </div>
+          <div ref={mockupRef} className="relative pb-16 pr-12">
+            <BrowserFrame url={caseStudy.desktopUrl}>
               <img
                 src={caseStudy.desktopImg}
                 alt={`Site da ${caseStudy.clinicName} — desktop`}
@@ -38,10 +62,13 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
                 loading="lazy"
                 decoding="async"
               />
-            </div>
+            </BrowserFrame>
 
-            {/* Mobile mockup */}
-            <div className="absolute bottom-0 right-0 w-[108px] md:w-[128px] rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+            {/* Mobile mockup com parallax */}
+            <m.div
+              style={reduced ? undefined : { y: mobileY }}
+              className="absolute bottom-0 right-0 w-[108px] md:w-[128px] rounded-2xl overflow-hidden shadow-lg border border-gray-200"
+            >
               <img
                 src={caseStudy.mobileImg}
                 alt={`Site da ${caseStudy.clinicName} — mobile`}
@@ -49,20 +76,24 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
                 loading="lazy"
                 decoding="async"
               />
-            </div>
+            </m.div>
           </div>
 
           {/* Video button */}
           {caseStudy.videoUrl && (
             <button
               onClick={() => setVideoOpen(true)}
-              className="mt-4 flex items-center gap-2 text-sm font-medium text-navy-600 hover:text-navy-700 transition-colors group"
+              className="mt-4 flex items-center gap-2 text-sm font-medium text-navy-600 hover:text-navy-700 transition-colors group cursor-pointer"
             >
-              <span className="w-8 h-8 rounded-full bg-navy-50 border border-navy-200 flex items-center justify-center group-hover:bg-navy-100 transition-colors">
+              <m.span
+                whileHover={{ scale: 1.12 }}
+                transition={springSnappy}
+                className="w-8 h-8 rounded-full bg-navy-50 border border-navy-200 flex items-center justify-center group-hover:bg-navy-100 transition-colors"
+              >
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
                   <path d="M2 1.5l9 4.5-9 4.5V1.5z" />
                 </svg>
-              </span>
+              </m.span>
               Ver vídeo do projeto
             </button>
           )}
@@ -88,7 +119,7 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
             {caseStudy.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs font-medium text-navy-700 bg-navy-50 border border-navy-100 rounded-full px-3 py-1"
+                className="text-xs font-medium text-navy-700 bg-white border border-navy-100 shadow-card rounded-full px-3 py-1"
               >
                 {tag}
               </span>
@@ -112,33 +143,44 @@ export function CaseShowcase({ caseStudy, reverse = false }: CaseShowcaseProps) 
       </div>
 
       {/* Video modal */}
-      {videoOpen && caseStudy.videoUrl && (
-        <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setVideoOpen(false)}
-        >
-          <div
-            className="relative w-full max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {videoOpen && caseStudy.videoUrl && (
+          <m.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setVideoOpen(false)}
           >
-            <button
-              onClick={() => setVideoOpen(false)}
-              aria-label="Fechar vídeo"
-              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+            <m.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={springSnappy}
+              className="relative w-full max-w-4xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M1 1l12 12M13 1L1 13" />
-              </svg>
-            </button>
-            <video
-              src={caseStudy.videoUrl}
-              controls
-              autoPlay
-              className="w-full rounded-xl shadow-2xl"
-            />
-          </div>
-        </div>
-      )}
+              <button
+                onClick={() => setVideoOpen(false)}
+                aria-label="Fechar vídeo"
+                className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M1 1l12 12M13 1L1 13" />
+                </svg>
+              </button>
+              <video
+                src={caseStudy.videoUrl}
+                controls
+                autoPlay
+                preload="metadata"
+                className="w-full rounded-xl shadow-2xl"
+              />
+            </m.div>
+          </m.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
