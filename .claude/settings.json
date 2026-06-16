@@ -6,7 +6,10 @@
       "Bash(pkill -f \"vite --port 5173\")",
       "Read(//home/pedrodioliveira/Pictures/Screenshots/**)",
       "Skill(run)",
-      "Skill(run:*)"
+      "Skill(run:*)",
+      "Bash(npx tsc *)",
+      "Bash(npx eslint *)",
+      "Bash(grep -rn \"1.099\\\\|1099\\\\|a partir de\\\\|R\\\\$\" src/ index.html)"
     ]
   }
 }

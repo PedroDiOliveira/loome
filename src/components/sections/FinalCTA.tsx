@@ -1,37 +1,10 @@
-import { useState } from "react"
 import { SectionWrapper } from "@/components/shared/SectionWrapper"
 import { WordReveal } from "@/components/shared/WordReveal"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { m, AnimatePresence, springSnappy } from "@/lib/motion"
+import { m, springSnappy } from "@/lib/motion"
 
 const WHATSAPP_URL = `https://wa.me/5561999023060?text=${encodeURIComponent("Olá! Vi o site da Loome e tenho interesse em um site para minha clínica.")}`
 
 export function FinalCTA() {
-  const [formOpen, setFormOpen] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSubmitting(true)
-
-    const form = e.currentTarget
-    const data = new FormData(form)
-
-    try {
-      await fetch("https://formspree.io/f/PLACEHOLDER_ID", {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      })
-      setSubmitted(true)
-    } catch {
-      setSubmitting(false)
-    }
-  }
-
   return (
     <SectionWrapper id="contato" background="dark" className="noise relative overflow-hidden">
       {/* Glow radial central */}
@@ -71,88 +44,6 @@ export function FinalCTA() {
             </svg>
             Falar no WhatsApp
           </m.a>
-
-          <p className="text-xs text-navy-100/40 mt-3">
-            Projetos a partir de R$ 1.099,90
-          </p>
-
-          <AnimatePresence mode="wait" initial={false}>
-            {/* Secondary CTA — Form toggle */}
-            {!formOpen && !submitted && (
-              <m.button
-                key="toggle"
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.2 }}
-                onClick={() => setFormOpen(true)}
-                className="mt-6 text-sm text-navy-100/50 hover:text-navy-100/90 transition-colors underline underline-offset-4 cursor-pointer"
-              >
-                Prefere preencher um formulário?
-              </m.button>
-            )}
-
-            {/* Form — revealed on demand */}
-            {formOpen && !submitted && (
-              <m.form
-                key="form"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                onSubmit={handleSubmit}
-                className="overflow-hidden text-left"
-              >
-                <div className="mt-6 space-y-4">
-                  <div className="h-px bg-white/10 mb-6" />
-                  <div>
-                    <Label htmlFor="name" className="text-gray-300">Nome</Label>
-                    <Input id="name" name="name" required placeholder="Seu nome" className="mt-1.5" />
-                  </div>
-                  <div>
-                    <Label htmlFor="whatsapp" className="text-gray-300">WhatsApp</Label>
-                    <Input id="whatsapp" name="whatsapp" type="tel" required placeholder="(00) 00000-0000" className="mt-1.5" />
-                  </div>
-                  <div>
-                    <Label htmlFor="clinic" className="text-gray-300">Nome da clínica</Label>
-                    <Input id="clinic" name="clinic" placeholder="Ex: Clínica Sorriso" className="mt-1.5" />
-                  </div>
-                  <Button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full mt-2 bg-white text-navy-950 hover:bg-gray-100 font-medium py-3 h-auto cursor-pointer"
-                  >
-                    {submitting ? "Enviando..." : "Enviar"}
-                  </Button>
-                </div>
-              </m.form>
-            )}
-
-            {submitted && (
-              <m.div
-                key="done"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="mt-6 text-center"
-              >
-                <m.svg
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ ...springSnappy, delay: 0.1 }}
-                  className="w-12 h-12 text-green-400 mx-auto"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                  <polyline points="22 4 12 14.01 9 11.01" />
-                </m.svg>
-                <p className="text-white font-medium mt-3">Mensagem enviada!</p>
-                <p className="text-navy-100/60 text-sm mt-1">Entraremos em contato em breve.</p>
-              </m.div>
-            )}
-          </AnimatePresence>
         </div>
       </div>
     </SectionWrapper>

@@ -105,10 +105,10 @@ export function Hero() {
                 Quero uma proposta
               </m.a>
               <a
-                href="#contato"
+                href="mailto:santanadioliveira@gmail.com?subject=Quero%20um%20site%20para%20minha%20cl%C3%ADnica"
                 className="text-sm text-navy-100/60 hover:text-white transition-colors underline underline-offset-4 self-center"
               >
-                ou deixe seus dados
+                ou mande um e-mail
               </a>
             </m.div>
 
